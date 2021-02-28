@@ -1,0 +1,10 @@
+{
+  "block.perpetualstew.stew_tub": "Stew Tub",
+
+  "message.perpetualstew.add_item": "You put %1$s in the stew!",
+  "message.perpetualstew.poison_stew": "The stew was poisoned! Add some magical food, like a golden apple, to fix it!",
+  "message.perpetualstew.too_much_meat": "The stew is ok, but it has too much meat. Try some veggies or sweets.",
+  "message.perpetualstew.too_much_veggie":  "The stew is ok, but it has too many veggies. Try some meat or sweets.",
+  "message.perpetualstew.too_much_sweet":  "The stew is ok, but it's too sweet. Try some meat or veggies.",
+  "message.perpetualstew.good_flavor":  "This stew smells great!"
+}
