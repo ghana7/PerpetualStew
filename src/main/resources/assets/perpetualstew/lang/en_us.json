@@ -1,10 +1,21 @@
 {
   "block.perpetualstew.stew_tub": "Stew Tub",
+  "item.perpetualstew.stew": "Stew",
 
   "message.perpetualstew.add_item": "You put %1$s in the stew!",
   "message.perpetualstew.poison_stew": "The stew was poisoned! Add some magical food, like a golden apple, to fix it!",
-  "message.perpetualstew.too_much_meat": "The stew is ok, but it has too much meat. Try some veggies or sweets.",
+  "message.perpetualstew.too_much_meat": "The stew is ok, but it has too much meat. Try some vegetables or sweets.",
   "message.perpetualstew.too_much_veggie":  "The stew is ok, but it has too many veggies. Try some meat or sweets.",
-  "message.perpetualstew.too_much_sweet":  "The stew is ok, but it's too sweet. Try some meat or veggies.",
-  "message.perpetualstew.good_flavor":  "This stew smells great!"
+  "message.perpetualstew.too_much_sweet":  "The stew is ok, but it's too sweet. Try some meat or vegetables.",
+  "message.perpetualstew.needs_meat": "The stew is ok, but it really could use more meat.",
+  "message.perpetualstew.needs_veggie": "The stew is ok, but it really could use more vegetables.",
+  "message.perpetualstew.needs_sweet": "The stew is ok, but it really could use more sweets.",
+  "message.perpetualstew.way_too_much_meat": "The stew tastes terrible - it has way too much meat. Try some vegetables or sweets.",
+  "message.perpetualstew.way_too_much_veggie":  "The stew tastes terrible - it has way too many veggies. Try some meat or sweets.",
+  "message.perpetualstew.way_too_much_sweet":  "The stew tastes terrible - it's way too sweet. Try some meat or vegetables.",
+  "message.perpetualstew.really_needs_meat": "The stew tastes terrible - it really needs more meat.",
+  "message.perpetualstew.really_needs_veggie": "The stew tastes terrible - it really needs more vegetables.",
+  "message.perpetualstew.really_needs_sweet": "The stew tastes terrible - it really needs more sweets.",
+  "message.perpetualstew.great_flavor":  "This stew smells great! The flavors and aromas are perfectly balanced!",
+  "message.perpetualstew.magic_stew":  "The stew has a magical whiff to it, too."
 }

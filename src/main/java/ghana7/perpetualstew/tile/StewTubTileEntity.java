@@ -32,11 +32,13 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
     private ItemStack[] lastTenItems;
     public int color;
     private int totalFoods;
+
     private int totalPoisonous;
     private int totalMeats;
     private int totalVeggies;
     private int totalSweets;
     private int totalMagic;
+
     public StewTubTileEntity() {
         super(PerpetualStewMod.STEW_TUB_TE.get());
         lastTenItems = new ItemStack[10];
@@ -76,6 +78,13 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
         timer = tag.getInt("timer");
         currentWaterAmount = tag.getInt("waterAmount");
         cookTime = tag.getInt("cookTime");
+
+        totalFoods = tag.getInt("perpetualstew_totalFoods");
+        totalPoisonous = tag.getInt("perpetualstew_totalPoisonous");
+        totalMeats = tag.getInt("perpetualstew_totalMeats");
+        totalVeggies = tag.getInt("perpetualstew_totalVeggies");
+        totalSweets = tag.getInt("perpetualstew_totalSweets");
+        totalMagic = tag.getInt("perpetualstew_totalMagic");
         super.read(state, tag);
     }
 
@@ -87,6 +96,13 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
         tag.putInt("timer", timer);
         tag.putInt("waterAmount", currentWaterAmount);
         tag.putInt("cookTime", cookTime);
+        tag.putInt("perpetualstew_totalFoods", totalFoods);
+        tag.putInt("perpetualstew_totalPoisonous", totalPoisonous);
+        tag.putInt("perpetualstew_totalMeats", totalMeats);
+        tag.putInt("perpetualstew_totalVeggies", totalVeggies);
+        tag.putInt("perpetualstew_totalSweets", totalSweets);
+        tag.putInt("perpetualstew_totalMagic", totalMagic);
+
         return super.write(tag);
     }
 
@@ -183,6 +199,48 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
         return (redSum << 16) + (greenSum << 8) + blueSum;
     }
 
+    public int getHunger() {
+        return 4 + (int)Math.floor(1.5 * Math.log(totalFoods) / Math.log(2.0));
+    }
+
+    public float getSaturationMod() {
+        int saturationTier;
+        int totalNormalFoods = totalMeats + totalSweets + totalVeggies;
+        float minAmount = (Math.min(Math.min(totalMeats, totalSweets), totalVeggies) * 1.0f) / totalNormalFoods;
+        float maxAmount = (Math.max(Math.max(totalMeats, totalSweets), totalVeggies) * 1.0f) / totalNormalFoods;
+        float fdd = maxAmount - minAmount;
+        if(fdd < 0.1f) {
+            saturationTier = 4;
+        } else if(fdd < 0.3f) {
+            saturationTier = 3;
+        } else {
+            saturationTier = 2;
+        }
+
+        if((totalMagic * 1.0f) / totalFoods > 0.1f && totalMagic > totalPoisonous) {
+            saturationTier++;
+        }
+
+        if(totalPoisonous > totalMagic) {
+            saturationTier = 1;
+        }
+
+        switch (saturationTier) {
+            case 1:
+                return 0.2f;
+            case 2:
+                return 0.6f;
+            case 3:
+                return 1.2f;
+            case 4:
+                return 1.6f;
+            case 5:
+                return 2.4f;
+            default:
+                return 0.0f;
+        }
+    }
+
     private void updateNutritionStats(ItemStack food, PlayerEntity player) {
         totalFoods++;
         switch (FoodInfo.getFoodType(food.getItem())) {
@@ -205,21 +263,66 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
         player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.add_item",
                 new TranslationTextComponent(food.getTranslationKey())),
         false);
+
+        int totalNormalFoods = totalMeats + totalSweets + totalVeggies;
+        float minAmount = (Math.min(Math.min(totalMeats, totalSweets), totalVeggies) * 1.0f) / totalNormalFoods;
+        float maxAmount = (Math.max(Math.max(totalMeats, totalSweets), totalVeggies) * 1.0f) / totalNormalFoods;
+        float fdd = maxAmount - minAmount;
+
+
         if(totalPoisonous > totalMagic) {
             player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.poison_stew"),
                     false);
-        } else if((double)totalMeats / (double)totalFoods > 0.5) {
-            player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.too_much_meat"),
-                    false);
-        } else if((double)totalVeggies / (double)totalFoods > 0.5) {
-            player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.too_much_veggie"),
-                    false);
-        } else if((double)totalSweets / (double)totalFoods > 0.5) {
-            player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.too_much_sweet"),
-                    false);
         } else {
-            player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.good_flavor"),
-                    false);
+            if(fdd < 0.1f) {
+                player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.great_flavor"),
+                        false);
+            } else if(fdd < 0.3f) {
+                if(totalMeats > totalSweets && totalMeats > totalVeggies) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.too_much_meat"),
+                            false);
+                } else if(totalSweets > totalMeats && totalSweets > totalVeggies) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.too_much_sweet"),
+                            false);
+                } else if(totalVeggies > totalMeats && totalVeggies > totalSweets) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.too_much_veggie"),
+                            false);
+                } else if(totalVeggies == totalMeats) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.needs_sweet"),
+                            false);
+                } else if(totalVeggies == totalSweets) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.needs_meat"),
+                            false);
+                } else if(totalSweets == totalMeats) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.needs_veggie"),
+                            false);
+                }
+            } else {
+                if(totalMeats > totalSweets && totalMeats > totalVeggies) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.way_too_much_meat"),
+                            false);
+                } else if(totalSweets > totalMeats && totalSweets > totalVeggies) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.way_too_much_sweet"),
+                            false);
+                } else if(totalVeggies > totalMeats && totalVeggies > totalSweets) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.way_too_much_veggie"),
+                            false);
+                }else if(totalVeggies == totalMeats) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.really_needs_sweet"),
+                            false);
+                } else if(totalVeggies == totalSweets) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.really_needs_meat"),
+                            false);
+                } else if(totalSweets == totalMeats) {
+                    player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.really_needs_veggie"),
+                            false);
+                }
+            }
+
+            if((totalMagic * 1.0f) / totalFoods > 0.1f && totalMagic > totalPoisonous) {
+                player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.magic_stew"),
+                        false);
+            }
         }
     }
 }

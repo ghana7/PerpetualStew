@@ -1,6 +1,7 @@
 package ghana7.perpetualstew.block;
 
 import ghana7.perpetualstew.PerpetualStewMod;
+import ghana7.perpetualstew.item.Stew;
 import ghana7.perpetualstew.tile.StewTubTileEntity;
 import ghana7.perpetualstew.util.FoodInfo;
 import net.minecraft.block.AbstractBlock;
@@ -76,12 +77,24 @@ public class StewTub extends Block {
                 }
 
                 return ActionResultType.func_233537_a_(worldIn.isRemote);
-            } else if(item.isFood()) {
+            } else if(item.isFood() && !(item instanceof Stew)) {
                 if(!worldIn.isRemote() && stewTubTileEntity.getWater() > 0) {
                     PerpetualStewMod.LOGGER.debug("color of item: " + FoodInfo.getFoodColor(item) + " - " + Integer.toHexString(FoodInfo.getFoodColor(item)));
                     ItemStack newStack = stewTubTileEntity.addFood(itemstack, player);
                     if(!player.isCreative()) {
                         player.setHeldItem(handIn, newStack);
+                    }
+                    return ActionResultType.SUCCESS;
+                }
+                return ActionResultType.func_233537_a_(worldIn.isRemote);
+            } else if (item == Items.BOWL) {
+                if(!worldIn.isRemote() && stewTubTileEntity.getWater() > 0) {
+                    ItemStack newStack = new ItemStack(PerpetualStewMod.STEW.get(), 1);
+                    ((Stew)PerpetualStewMod.STEW.get()).setHunger(newStack, stewTubTileEntity.getHunger());
+                    ((Stew)PerpetualStewMod.STEW.get()).setSaturationMod(newStack, stewTubTileEntity.getSaturationMod());
+                    player.addItemStackToInventory(newStack);
+                    if(!player.isCreative()) {
+                        itemstack.shrink(1);
                     }
                     return ActionResultType.SUCCESS;
                 }
