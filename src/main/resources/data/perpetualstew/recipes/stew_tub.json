@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "l l",
+    "lbl",
+    "lll"
+  ],
+  "key":
+  {
+    "l":
+    {
+      "tag": "minecraft:logs"
+    },
+    "b":
+    {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result":
+  {
+    "item": "perpetualstew:stew_tub",
+    "count": 1
+  }
+}

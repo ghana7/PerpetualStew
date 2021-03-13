@@ -5,6 +5,7 @@ import ghana7.perpetualstew.item.Stew;
 import ghana7.perpetualstew.rendering.StewTubTileEntityRenderer;
 import ghana7.perpetualstew.tile.StewTubTileEntity;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.*;

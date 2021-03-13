@@ -200,7 +200,7 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
     }
 
     public int getHunger() {
-        return 4 + (int)Math.floor(1.5 * Math.log(totalFoods) / Math.log(2.0));
+        return 4 + (int)Math.floor(Math.log(totalFoods) / Math.log(2.0));
     }
 
     public float getSaturationMod() {

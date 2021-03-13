@@ -4,10 +4,7 @@ import ghana7.perpetualstew.PerpetualStewMod;
 import ghana7.perpetualstew.item.Stew;
 import ghana7.perpetualstew.tile.StewTubTileEntity;
 import ghana7.perpetualstew.util.FoodInfo;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -27,7 +24,7 @@ import javax.annotation.Nullable;
 
 public class StewTub extends Block {
     public StewTub() {
-        super(AbstractBlock.Properties.create(Material.WOOD).sound(SoundType.WOOD).notSolid());
+        super(AbstractBlock.Properties.create(Material.WOOD).sound(SoundType.WOOD).hardnessAndResistance(2.5F).notSolid());
     }
 
     @Override
