@@ -2,6 +2,7 @@ package ghana7.perpetualstew;
 
 import ghana7.perpetualstew.block.StewTub;
 import ghana7.perpetualstew.item.Stew;
+import ghana7.perpetualstew.item.TastingSpoon;
 import ghana7.perpetualstew.rendering.StewTubTileEntityRenderer;
 import ghana7.perpetualstew.tile.StewTubTileEntity;
 import net.minecraft.block.Block;
@@ -43,6 +44,10 @@ public class PerpetualStewMod
 
     public static final RegistryObject<Item> STEW = ITEMS.register("stew", () ->
             new Stew()
+    );
+
+    public static final RegistryObject<Item> TASTING_SPOON = ITEMS.register("tasting_spoon", () ->
+            new TastingSpoon()
     );
 
     public static final RegistryObject<TileEntityType<StewTubTileEntity>> STEW_TUB_TE = TILE_ENTITY_TYPES.register(

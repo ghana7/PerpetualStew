@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "b",
+    "s",
+    "s"
+  ],
+  "key":
+  {
+    "s":
+    {
+      "tag": "forge:rods/wooden"
+    },
+    "b":
+    {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result":
+  {
+    "item": "perpetualstew:tasting_spoon",
+    "count": 1
+  }
+}

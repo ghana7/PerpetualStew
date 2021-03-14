@@ -263,7 +263,11 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
         player.sendStatusMessage(new TranslationTextComponent("message.perpetualstew.add_item",
                 new TranslationTextComponent(food.getTranslationKey())),
         false);
+        displayQualityInfo(player);
 
+    }
+
+    public void displayQualityInfo(PlayerEntity player) {
         int totalNormalFoods = totalMeats + totalSweets + totalVeggies;
         float minAmount = (Math.min(Math.min(totalMeats, totalSweets), totalVeggies) * 1.0f) / totalNormalFoods;
         float maxAmount = (Math.max(Math.max(totalMeats, totalSweets), totalVeggies) * 1.0f) / totalNormalFoods;
@@ -325,4 +329,5 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
             }
         }
     }
+
 }

@@ -96,6 +96,12 @@ public class StewTub extends Block {
                     return ActionResultType.SUCCESS;
                 }
                 return ActionResultType.func_233537_a_(worldIn.isRemote);
+            } else if (item == PerpetualStewMod.TASTING_SPOON.get()) {
+                if(!worldIn.isRemote() && stewTubTileEntity.getWater() > 0) {
+                    stewTubTileEntity.displayQualityInfo(player);
+                    return ActionResultType.SUCCESS;
+                }
+                return ActionResultType.func_233537_a_(worldIn.isRemote);
             } else {
                 return ActionResultType.PASS;
             }

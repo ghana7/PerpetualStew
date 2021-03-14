@@ -1,6 +1,7 @@
 {
   "block.perpetualstew.stew_tub": "Stew Tub",
   "item.perpetualstew.stew": "Stew",
+  "item.perpetualstew.tasting_spoon": "Tasting Spoon",
 
   "message.perpetualstew.add_item": "You put %1$s in the stew!",
   "message.perpetualstew.poison_stew": "The stew was poisoned! Add some magical food, like a golden apple, to fix it!",
