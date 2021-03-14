@@ -23,8 +23,7 @@ import java.util.List;
 
 public class Stew extends Item {
     public Stew() {
-        super(new Item.Properties()
-                .group(ItemGroup.FOOD));
+        super(new Item.Properties());
     }
 
     public int getHunger(ItemStack stack) {
