@@ -171,7 +171,6 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
 
         //update shit
         color = getAverageColor();
-        PerpetualStewMod.LOGGER.debug("set color to " + Integer.toHexString(color));
         updateNutritionStats(food, player);
 
         ItemStack cp = food.copy();
@@ -194,8 +193,6 @@ public class StewTubTileEntity extends TileEntity implements ITickableTileEntity
         redSum /= lastTenItems.length;
         greenSum /= lastTenItems.length;
         blueSum /= lastTenItems.length;
-        PerpetualStewMod.LOGGER.debug("rgb: " + redSum + " " + greenSum + " " + blueSum);
-        PerpetualStewMod.LOGGER.debug("est color " + ((redSum << 16) + (greenSum << 8) + blueSum) + " - " + Integer.toHexString((redSum << 16) + (greenSum << 8) + blueSum));
         return (redSum << 16) + (greenSum << 8) + blueSum;
     }
 

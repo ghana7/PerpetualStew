@@ -76,7 +76,6 @@ public class StewTub extends Block {
                 return ActionResultType.func_233537_a_(worldIn.isRemote);
             } else if(item.isFood() && !(item instanceof Stew)) {
                 if(!worldIn.isRemote() && stewTubTileEntity.getWater() > 0) {
-                    PerpetualStewMod.LOGGER.debug("color of item: " + FoodInfo.getFoodColor(item) + " - " + Integer.toHexString(FoodInfo.getFoodColor(item)));
                     ItemStack newStack = stewTubTileEntity.addFood(itemstack, player);
                     if(!player.isCreative()) {
                         player.setHeldItem(handIn, newStack);

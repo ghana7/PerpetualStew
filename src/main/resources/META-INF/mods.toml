@@ -5,7 +5,7 @@
     loaderVersion="[35,)"
     license="GNU GPLv3"
     # A URL to refer people to when problems occur with this mod
-    issueTrackerURL="https://github.com/ghana7/ExtraCoals/issues"
+    issueTrackerURL="https://github.com/ghana7/PerpetualStew/issues"
     # If the mods defined in this file should show as seperate resource packs
     showAsResourcePack=false
 
@@ -13,12 +13,12 @@
       modId="perpetualstew"
       version="1.0"
       displayName="Perpetual Stew"
-      displayURL="https://github.com/ghana7/ExtraCoals"
+      displayURL="https://github.com/ghana7/PerpetualStew"
       logoFile="logo.png"
       credits=""
       authors="ghana7"
       description='''
-      Adds the perpetual stew, a great food option for communities
+      Adds the perpetual stew, a great communal food option for groups of players
       '''
 
       [[dependencies.perpetualstew]]
