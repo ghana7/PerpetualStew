@@ -5,8 +5,53 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 
+import java.util.Arrays;
+
 public class FoodInfo {
     public enum FoodType {Poison, Meat, Veggie, Sweets, Magic}
+    private static String[] validFoods = {
+            "item.minecraft.apple",
+            "item.minecraft.baked_potato",
+            "item.minecraft.beef",
+            "item.minecraft.beetroot",
+            "item.minecraft.beetroot_soup",
+            "item.minecraft.bread",
+            "item.minecraft.carrot",
+            "item.minecraft.chicken",
+            "item.minecraft.chorus_fruit",
+            "item.minecraft.cod",
+            "item.minecraft.cooked_beef",
+            "item.minecraft.cooked_chicken",
+            "item.minecraft.cooked_cod",
+            "item.minecraft.cooked_mutton",
+            "item.minecraft.cooked_porkchop",
+            "item.minecraft.cooked_rabbit",
+            "item.minecraft.cooked_salmon",
+            "item.minecraft.cookie",
+            "item.minecraft.dried_kelp",
+            "item.minecraft.golden_apple",
+            "item.minecraft.golden_carrot",
+            "item.minecraft.honey_bottle",
+            "item.minecraft.melon_slice",
+            "item.minecraft.mushroom_stew",
+            "item.minecraft.poisonous_potato",
+            "item.minecraft.porkchop",
+            "item.minecraft.potato",
+            "item.minecraft.pufferfish",
+            "item.minecraft.pumpkin_pie",
+            "item.minecraft.rabbit",
+            "item.minecraft.rabbit_stew",
+            "item.minecraft.rotten_flesh",
+            "item.minecraft.salmon",
+            "item.minecraft.spider_eye",
+            "item.minecraft.suspicious_stew",
+            "item.minecraft.sweet_berries",
+            "item.minecraft.tropical_fish"
+    };
+
+    public static boolean isValidFood(Item item) {
+        return Arrays.stream(validFoods).anyMatch(item.getTranslationKey()::equals);
+    }
     public static int getFoodColor(Item item) {
         switch (item.getTranslationKey()) {
             case "item.minecraft.apple":

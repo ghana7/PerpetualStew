@@ -11,7 +11,7 @@
 
     [[mods]]
       modId="perpetualstew"
-      version="1.0"
+      version="1.0.1"
       displayName="Perpetual Stew"
       displayURL="https://github.com/ghana7/PerpetualStew"
       logoFile="logo.png"

@@ -74,7 +74,7 @@ public class StewTub extends Block {
                 }
 
                 return ActionResultType.func_233537_a_(worldIn.isRemote);
-            } else if(item.isFood() && !(item instanceof Stew)) {
+            } else if(FoodInfo.isValidFood(item)) {
                 if(!worldIn.isRemote() && stewTubTileEntity.getWater() > 0) {
                     ItemStack newStack = stewTubTileEntity.addFood(itemstack, player);
                     if(!player.isCreative()) {
